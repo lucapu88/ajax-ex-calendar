@@ -5,28 +5,61 @@ $(document).ready(function() {
   var dataIniziale = '2018-01-01';
   var momentIniziale = moment(dataIniziale);
   stampaMese(momentIniziale); //chiamo la mia funzione per visualizzare il calendario con il mese di gennaio
-  $('.next-right').click(function(){ //al click sul pulsante di destra
-    momentIniziale.add(1, 'months'); //aggiungo un mese alla data da visualizzare
-    stampaMese(momentIniziale); //e stampo il calendario aggiornato
-  });
-  $('.prev-left').click(function(){ //al click sul pulsante di sinistra
-    momentIniziale.subtract(1, 'months'); //tolgo un mese alla data da visualizzare
-    stampaMese(momentIniziale); //e stampo il calendario aggiornato
-  });
+    $('.next-right').click(function(){ //al click sul pulsante di destra
+      var data_li_last = $('ul li:last-child').attr('dataDay'); //creo una var che mi prende l'attributo dell'ultimo li
+      if (data_li_last != '2018-12-31') { //se l'ultimo li è diverso dal 2018-12-31
+        $('button').css("color","black"); //reimposto il colore ai button nel caso si è verificato l'else
+        momentIniziale.add(1, 'months'); //aggiungo un mese alla data da visualizzare
+        stampaMese(momentIniziale); //e stampo il calendario aggiornato
+      } else { //altrimenti se è uguale a quella data (2018-12-31)
+        $('.next-right').css("color","white"); //cambio il colore al button di destra per far capire che non può andare oltre
+      }
+    });
+    $('.prev-left').click(function(){ //al click sul pulsante di sinistra
+      var data_li_first = $('ul li:first-child').attr('dataDay'); //creo una var che mi prende l'attributo del primo li
+      if (data_li_first != '2018-01-01') { //se il primo li è diverso dal 2018-01-01
+        $('button').css("color","black"); //reimposto il colore ai button nel caso si è verificato l'else
+        momentIniziale.subtract(1, 'months'); //tolgo un mese alla data da visualizzare
+        stampaMese(momentIniziale); //e stampo il calendario aggiornato
+      } else { //altrimenti se è uguale a quella data (2018-01-01)
+        $('.prev-left').css("color","white"); //cambio il colore al button di sinistra per far capire che non può andare oltre
+      }
+    });
 
 //---------------------------------------------FUNZIONI-------------------------------------------------------
 //funzione che mi va ad appendere il calendario aggiornato
 function stampaMese(mese) {
   $('#calendario').empty(); //svuoto il calendario
+  var dataMeseGiorno = moment(mese); //mi creo un clone della data del mese per inserirlo dentro al dataDay
   var giorniMese = mese.daysInMonth(); //recupero i giorni del mese
   var meseTesto = mese.format('MMMM') //imposto come deve essere visualizzato
   $('#meseCorrente').text(meseTesto); //imposto il mese che andrà dentro lo span
   for (var i = 1; i <= giorniMese; i++) { //ciclo tutti i giorni del mese
     var context = { //creo il contenuto che andrà nel mio template
-      day : i + ' ' + meseTesto
+      day : i + ' ' + meseTesto,
+      formatDay : dataMeseGiorno.format('YYYY-MM-DD')
     }
     var html_finale = template_function(context);
     $('#calendario').append(html_finale); //appendo il mio template
+    dataMeseGiorno.add(1, 'days'); //incremento di uno i giorni altrimenti mi stampa sempre 1.
   }
 }
+
+//funzione che fa una chiamata ajax e mi va a prendere tutte le festività del 2018
+// function stampaFeste(mese) {
+//   $ajax ({
+//     url: 'https://flynn.boolean.careers/exercises/api/holidays',
+//     data: {
+//       'year': 2018,
+//       'month': mese.month()
+//     },
+//     method: 'GET',
+//     succes: function(data) {
+//
+//     },
+//     error: function() {
+//       alert('errore festività');
+//     }
+//   });
+// }
 });
