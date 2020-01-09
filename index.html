@@ -5,13 +5,26 @@
     <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>calendatio-2018</title>
+    <title>calendario-2018</title>
     <script src="https://momentjs.com/downloads/moment.js" charset="utf-8"></script>
-    <link rel="shortcut icon" href="img/favicon.png" />
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
+    <header>
+      <button class="prev-left"><i class="fas fa-arrow-circle-left"></i>previous</button>
+      <h1><span id="meseCorrente"></span> 2018</h1>
+      <button class="next-right"> next <i class="fas fa-arrow-circle-right"></i></button>
+    </header>
+    <main>
+      <ul id="calendario">
 
+      </ul>
+    </main>
+
+<!-- script che verrà inserito con .append tramite handlebars -->
+    <script id="myTemplate" type="text/x-handlebars-template">
+      <li>{{ day }}</li>
+    </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="main.js" charset="utf-8"></script>
   </body>
