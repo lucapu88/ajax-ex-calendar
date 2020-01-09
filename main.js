@@ -21,7 +21,7 @@ function stampaMese(mese) {
   var giorniMese = mese.daysInMonth(); //recupero i giorni del mese
   var meseTesto = mese.format('MMMM') //imposto come deve essere visualizzato
   $('#meseCorrente').text(meseTesto); //imposto il mese che andrà dentro lo span
-  for (var i = 1; i <= giorniMese.length; i++) { //ciclo tutti i giorni del mese
+  for (var i = 1; i <= giorniMese; i++) { //ciclo tutti i giorni del mese
     var context = { //creo il contenuto che andrà nel mio template
       day : i + ' ' + meseTesto
     }

@@ -22,3 +22,8 @@ button {
 button:hover {
   cursor: pointer;
 }
+ul {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
