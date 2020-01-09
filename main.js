@@ -3,8 +3,9 @@ $(document).ready(function() {
   var template_html = $('#myTemplate').html();//recupero il codice html del template
   var template_function = Handlebars.compile(template_html);//do in pasto a handlebars il codice html
   var dataIniziale = '2018-01-01';
-  var momentIniziale = moment(dataIniziale);
+  var momentIniziale = moment(dataIniziale); //creo un clone della data iniziale
   stampaMese(momentIniziale); //chiamo la mia funzione per visualizzare il calendario con il mese di gennaio
+  stampaFeste(momentIniziale); //stampo il calendario aggiornato con le festività
     $('.next-right').click(function(){ //al click sul pulsante di destra
       var data_li_last = $('ul li:last-child').attr('dataDay'); //creo una var che mi prende l'attributo dell'ultimo li
       if (data_li_last != '2018-12-31') { //se l'ultimo li è diverso dal 2018-12-31
@@ -34,7 +35,7 @@ function stampaMese(mese) {
   $('#calendario').empty(); //svuoto il calendario
   var dataMeseGiorno = moment(mese); //mi creo un clone della data del mese per inserirlo dentro al dataDay
   var giorniMese = mese.daysInMonth(); //recupero i giorni del mese
-  var meseTesto = mese.format('MMMM') //imposto come deve essere visualizzato
+  var meseTesto = mese.format('MMMM'); //imposto come deve essere visualizzato
   $('#meseCorrente').text(meseTesto); //imposto il mese che andrà dentro lo span
   for (var i = 1; i <= giorniMese; i++) { //ciclo tutti i giorni del mese
     var context = { //creo il contenuto che andrà nel mio template
