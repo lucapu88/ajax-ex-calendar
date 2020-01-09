@@ -56,14 +56,13 @@ function stampaFeste(mese) {
       'month': mese.month()
     },
     method: 'GET',
-    succes: function(data) {
+    success: function(data) {
       var festivo = data.response; //creo una var con l'array dove ci sono le festività
-      console.log(festivo);
       for (var i = 0; i < festivo.length; i++) { //scorro tutto l'array dove ci sono le festività
         var festivoAttuale = festivo[i];
         var dateFesta = festivoAttuale.date; //mi creo una var per le date dei festivi
         var nomeFesta = festivoAttuale.name; //mi creo una var per i nomi delle feste
-        $('#calendario li[dataday="' + dateFesta + '"]').addClass('festa').append('-' + nomeFesta); //appendo il nome per la corrispettiva data della festa
+        $('#calendario li[dataDay="' + dateFesta + '"]').addClass('festa').append('-' + nomeFesta); //appendo il nome per la corrispettiva data della festa
       }
     },
     error: function() {
