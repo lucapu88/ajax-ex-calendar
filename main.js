@@ -10,7 +10,8 @@ $(document).ready(function() {
       if (data_li_last != '2018-12-31') { //se l'ultimo li è diverso dal 2018-12-31
         $('button').css("color","black"); //reimposto il colore ai button nel caso si è verificato l'else
         momentIniziale.add(1, 'months'); //aggiungo un mese alla data da visualizzare
-        stampaMese(momentIniziale); //e stampo il calendario aggiornato
+        stampaMese(momentIniziale); //stampo il calendario aggiornato
+        stampaFeste(momentIniziale); //stampo il calendario aggiornato con le festività
       } else { //altrimenti se è uguale a quella data (2018-12-31)
         $('.next-right').css("color","white"); //cambio il colore al button di destra per far capire che non può andare oltre
       }
@@ -20,7 +21,8 @@ $(document).ready(function() {
       if (data_li_first != '2018-01-01') { //se il primo li è diverso dal 2018-01-01
         $('button').css("color","black"); //reimposto il colore ai button nel caso si è verificato l'else
         momentIniziale.subtract(1, 'months'); //tolgo un mese alla data da visualizzare
-        stampaMese(momentIniziale); //e stampo il calendario aggiornato
+        stampaMese(momentIniziale); //stampo il calendario aggiornato
+        stampaFeste(momentIniziale); //stampo il calendario aggiornato con le festività
       } else { //altrimenti se è uguale a quella data (2018-01-01)
         $('.prev-left').css("color","white"); //cambio il colore al button di sinistra per far capire che non può andare oltre
       }
@@ -46,20 +48,27 @@ function stampaMese(mese) {
 }
 
 //funzione che fa una chiamata ajax e mi va a prendere tutte le festività del 2018
-// function stampaFeste(mese) {
-//   $ajax ({
-//     url: 'https://flynn.boolean.careers/exercises/api/holidays',
-//     data: {
-//       'year': 2018,
-//       'month': mese.month()
-//     },
-//     method: 'GET',
-//     succes: function(data) {
-//
-//     },
-//     error: function() {
-//       alert('errore festività');
-//     }
-//   });
-// }
+function stampaFeste(mese) {
+  $.ajax({
+    url: 'https://flynn.boolean.careers/exercises/api/holidays',
+    data: {
+      'year': 2018,
+      'month': mese.month()
+    },
+    method: 'GET',
+    succes: function(data) {
+      var festivo = data.response; //creo una var con l'array dove ci sono le festività
+      console.log(festivo);
+      for (var i = 0; i < festivo.length; i++) { //scorro tutto l'array dove ci sono le festività
+        var festivoAttuale = festivo[i];
+        var dateFesta = festivoAttuale.date; //mi creo una var per le date dei festivi
+        var nomeFesta = festivoAttuale.name; //mi creo una var per i nomi delle feste
+        $('#calendario li[dataday="' + dateFesta + '"]').addClass('festa').append('-' + nomeFesta); //appendo il nome per la corrispettiva data della festa
+      }
+    },
+    error: function() {
+      alert('errore festività');
+    }
+  });
+}
 });

@@ -27,3 +27,7 @@ ul {
   flex-direction: column;
   align-items: center;
 }
+.festa {
+  background-color: red;
+  color: white;
+}
