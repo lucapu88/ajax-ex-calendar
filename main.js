@@ -4,28 +4,32 @@ $(document).ready(function() {
   var template_function = Handlebars.compile(template_html);//do in pasto a handlebars il codice html
   var dataIniziale = '2018-01-01';
   var momentIniziale = moment(dataIniziale); //creo un clone della data iniziale
+  var ultimaData = '2018-12-31'; //creo una var che mi prende l'ultima data
+  var primaData = '2018-01-01'; //creo una var che mi prende la prima data
   stampaMese(momentIniziale); //chiamo la mia funzione per visualizzare il calendario con il mese di gennaio
   stampaFeste(momentIniziale); //stampo il calendario aggiornato con le festività
     $('.next-right').click(function(){ //al click sul pulsante di destra
       var data_li_last = $('ul li:last-child').attr('dataDay'); //creo una var che mi prende l'attributo dell'ultimo li
-      if (data_li_last != '2018-12-31') { //se l'ultimo li è diverso dal 2018-12-31
+      if (data_li_last != ultimaData ) { //se l'ultimo li è diverso da ultimaData
         $('button').css("color","black"); //reimposto il colore ai button nel caso si è verificato l'else
         momentIniziale.add(1, 'months'); //aggiungo un mese alla data da visualizzare
         stampaMese(momentIniziale); //stampo il calendario aggiornato
         stampaFeste(momentIniziale); //stampo il calendario aggiornato con le festività
       } else { //altrimenti se è uguale a quella data (2018-12-31)
         $('.next-right').css("color","white"); //cambio il colore al button di destra per far capire che non può andare oltre
+        alert("Il calendario è disponibile solo per l'anno 2018"); //mi appare un alert dove mi avvisa che il calendario non è disponibile per altri anni
       }
     });
     $('.prev-left').click(function(){ //al click sul pulsante di sinistra
       var data_li_first = $('ul li:first-child').attr('dataDay'); //creo una var che mi prende l'attributo del primo li
-      if (data_li_first != '2018-01-01') { //se il primo li è diverso dal 2018-01-01
+      if (data_li_first != primaData) { //se il primo li è diverso da primaData
         $('button').css("color","black"); //reimposto il colore ai button nel caso si è verificato l'else
         momentIniziale.subtract(1, 'months'); //tolgo un mese alla data da visualizzare
         stampaMese(momentIniziale); //stampo il calendario aggiornato
         stampaFeste(momentIniziale); //stampo il calendario aggiornato con le festività
       } else { //altrimenti se è uguale a quella data (2018-01-01)
         $('.prev-left').css("color","white"); //cambio il colore al button di sinistra per far capire che non può andare oltre
+        alert("Il calendario è disponibile solo per l'anno 2018"); //mi appare un alert dove mi avvisa che il calendario non è disponibile per altri anni
       }
     });
 
@@ -35,11 +39,12 @@ function stampaMese(mese) {
   $('#calendario').empty(); //svuoto il calendario
   var dataMeseGiorno = moment(mese); //mi creo un clone della data del mese per inserirlo dentro al dataDay
   var giorniMese = mese.daysInMonth(); //recupero i giorni del mese
-  var meseTesto = mese.format('MMMM'); //imposto come deve essere visualizzato
+  var meseTesto = mese.format('MMMM'); //imposto come deve essere visualizzato il mese
+  var settimanaTesto = mese.format('dddd'); //imposto come deve essere visualizzato il giorno
   $('#meseCorrente').text(meseTesto); //imposto il mese che andrà dentro lo span
   for (var i = 1; i <= giorniMese; i++) { //ciclo tutti i giorni del mese
     var context = { //creo il contenuto che andrà nel mio template
-      day : i + ' ' + meseTesto,
+      day : i + ' ' + settimanaTesto,
       formatDay : dataMeseGiorno.format('YYYY-MM-DD')
     }
     var html_finale = template_function(context);
