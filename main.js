@@ -40,17 +40,18 @@ function stampaMese(mese) {
   var dataMeseGiorno = moment(mese); //mi creo un clone della data del mese per inserirlo dentro al dataDay
   var giorniMese = mese.daysInMonth(); //recupero i giorni del mese
   var meseTesto = mese.format('MMMM'); //imposto come deve essere visualizzato il mese
-  var settimanaTesto = mese.format('dddd'); //imposto come deve essere visualizzato il giorno
   $('#meseCorrente').text(meseTesto); //imposto il mese che andrà dentro lo span
   for (var i = 1; i <= giorniMese; i++) { //ciclo tutti i giorni del mese
     var context = { //creo il contenuto che andrà nel mio template
-      day : i + ' ' + settimanaTesto,
-      formatDay : dataMeseGiorno.format('YYYY-MM-DD')
+      dayN : i, //inserisco nell'li il giorno numerico
+      dayW : dataMeseGiorno.format('dddd'), //inserisco nel p dentro l'li il giorno della settimana
+      formatDay : dataMeseGiorno.format('YYYY-MM-DD') //inserisco nel dataDay la data totale che mi servirà per impostare il blocco all'anno 2018
     }
-    var html_finale = template_function(context);
+    var html_finale = template_function(context); //creo il mio template
     $('#calendario').append(html_finale); //appendo il mio template
     dataMeseGiorno.add(1, 'days'); //incremento di uno i giorni altrimenti mi stampa sempre 1.
   }
+  $('.Sunday').css({"color":"red", "font-weight":"bold"}); //coloro tutte le domenice per capire l'inizio di settimana.
 }
 
 //funzione che fa una chiamata ajax e mi va a prendere tutte le festività del 2018
@@ -65,7 +66,7 @@ function stampaFeste(mese) {
     success: function(data) {
       var festivo = data.response; //creo una var con l'array dove ci sono le festività
       for (var i = 0; i < festivo.length; i++) { //scorro tutto l'array dove ci sono le festività
-        var festivoAttuale = festivo[i];
+        var festivoAttuale = festivo[i]; //prendo il giorno festivo singolo
         var dateFesta = festivoAttuale.date; //mi creo una var per le date dei festivi
         var nomeFesta = festivoAttuale.name; //mi creo una var per i nomi delle feste
         $('#calendario li[dataDay="' + dateFesta + '"]').addClass('festa').append('-' + nomeFesta); //appendo il nome per la corrispettiva data della festa
