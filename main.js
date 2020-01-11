@@ -16,7 +16,7 @@ $(document).ready(function() {
         momentIniziale.add(1, 'months'); //aggiungo un mese alla data da visualizzare
         stampaMese(momentIniziale); //stampo il calendario aggiornato
         stampaFeste(momentIniziale); //stampo il calendario aggiornato con le festività
-        stampaSfondo(momentIniziale);
+        stampaSfondo(momentIniziale); //applico la mia funzione che mi cambia lo sfondo
       } else { //altrimenti se è uguale a quella data (2018-12-31)
         $('.next-right').css("color","white"); //cambio il colore al button di destra per far capire che non può andare oltre
         alert("Il calendario è disponibile solo per l'anno 2018"); //mi appare un alert dove mi avvisa che il calendario non è disponibile per altri anni
@@ -31,7 +31,7 @@ $(document).ready(function() {
         momentIniziale.subtract(1, 'months'); //tolgo un mese alla data da visualizzare
         stampaMese(momentIniziale); //stampo il calendario aggiornato
         stampaFeste(momentIniziale); //stampo il calendario aggiornato con le festività
-        stampaSfondo(momentIniziale);
+        stampaSfondo(momentIniziale); //applico la mia funzione che mi cambia lo sfondo
       } else { //altrimenti se è uguale a quella data (2018-01-01)
         $('.prev-left').css("color","white"); //cambio il colore al button di sinistra per far capire che non può andare oltre
         alert("Il calendario è disponibile solo per l'anno 2018"); //mi appare un alert dove mi avvisa che il calendario non è disponibile per altri anni
@@ -60,48 +60,47 @@ function stampaMese(mese) {
   $('.Sunday').css({"color":"red", "font-weight":"bold"}); //coloro tutte le domenice per capire l'inizio di settimana.
 }
 
+//funzione che mi stampa per ogni mese un'immagine diversa
 function stampaSfondo(mese) {
-  var meseVisualizzato = mese.format('MMM');
-  console.log(meseVisualizzato);
-
-  if (meseVisualizzato == 'Jan' ) {
-    $('body').css({"background-image":"url('https://www.settemuse.it/sfondi_ambiente/stagione_inverno/stagione_inverno_020.jpg')"});
+  var meseVisualizzato = mese.format('MMM'); //prendo l'argomento passato e lo formatto in modo che mi prenda solo il mese
+  switch(meseVisualizzato) {
+    case ('Jan'):
+      $('body').css({"background-image":"url('https://www.settemuse.it/sfondi_ambiente/stagione_inverno/stagione_inverno_020.jpg')"});
+      break;
+    case ('Feb') :
+      $('body').css({"background-image":"url('http://wallpapers4screen.com/Uploads/19-2-2016/28434/thumb2-snow-forest-spring-snowdrops-flowers.jpg')"});
+      break;
+    case ('Mar') :
+      $('body').css({"background-image":"url('https://www.faidateingiardino.com/wp-content/uploads/2018/03/primavera.jpg')"});
+      break;
+    case ('Apr') :
+      $('body').css({"background-image":"url('https://www.fashionbrasilblog.it/wp-content/uploads/2015/03/primavera-margherita.jpg')"});
+      break;
+    case ('May') :
+      $('body').css({"background-image":"url('https://www.acasadilora.it/wp-content/uploads/2019/04/FIORI-MAGGIO.jpg')"});
+      break;
+    case ('Jun') :
+      $('body').css({"background-image":"url('https://cdn.pixabay.com/photo/2019/03/04/14/38/field-4034274_960_720.jpg')"});
+      break;
+    case ('Jul') :
+      $('body').css({"background-image":"url('https://www.biopianeta.it/wp-content/uploads/2018/06/seashell-2821388_960_720.jpg')"});
+      break;
+    case ('Aug') :
+      $('body').css({"background-image":"url('http://overnature.net/download/401-spiaggia-selvaggia.jpg')"});
+      break;
+    case ('Sep') :
+      $('body').css({"background-image":"url('https://images.pexels.com/photos/1704948/pexels-photo-1704948.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260')"});
+      break;
+    case ('Oct') :
+      $('body').css({"background-image":"url('http://www.sfondilandia.it/1280/Foglie01.jpg')"});
+      break;
+    case ('Nov') :
+      $('body').css({"background-image":"url('https://images.alphacoders.com/159/thumb-1920-159471.jpg')"});
+      break;
+    case ('Dec') :
+      $('body').css({"background-image":"url('https://www.gaiaresidencehotel.com/wp-content/uploads/2017/09/SFONDI-NATALE-HD-pupazzi-di-neve-910x480.jpg')"});
+      break;
   }
-  if (meseVisualizzato == 'Feb' ) {
-    $('body').css({"background-image":"url('http://wallpapers4screen.com/Uploads/19-2-2016/28434/thumb2-snow-forest-spring-snowdrops-flowers.jpg')"});
-  }
-  if (meseVisualizzato == 'Mar' ) {
-    $('body').css({"background-image":"url('https://www.faidateingiardino.com/wp-content/uploads/2018/03/primavera.jpg')"});
-  }
-  if (meseVisualizzato == 'Apr' ) {
-    $('body').css({"background-image":"url('https://www.fashionbrasilblog.it/wp-content/uploads/2015/03/primavera-margherita.jpg')"});
-  }
-  if (meseVisualizzato == 'May' ) {
-    $('body').css({"background-image":"url('https://www.acasadilora.it/wp-content/uploads/2019/04/FIORI-MAGGIO.jpg')"});
-  }
-  if (meseVisualizzato == 'Jun' ) {
-    $('body').css({"background-image":"url('https://cdn.pixabay.com/photo/2019/03/04/14/38/field-4034274_960_720.jpg')"});
-  }
-  if (meseVisualizzato == 'Jul' ) {
-    $('body').css({"background-image":"url('https://www.biopianeta.it/wp-content/uploads/2018/06/seashell-2821388_960_720.jpg')"});
-  }
-  if (meseVisualizzato == 'Aug' ) {
-    $('body').css({"background-image":"url('http://overnature.net/download/401-spiaggia-selvaggia.jpg')"});
-  }
-  if (meseVisualizzato == 'Sep' ) {
-    $('body').css({"background-image":"url('https://images.pexels.com/photos/1704948/pexels-photo-1704948.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260')"});
-  }
-  if (meseVisualizzato == 'Oct' ) {
-    $('body').css({"background-image":"url('http://www.sfondilandia.it/1280/Foglie01.jpg')"});
-  }
-  if (meseVisualizzato == 'Nov' ) {
-    $('body').css({"background-image":"url('https://images.alphacoders.com/159/thumb-1920-159471.jpg')"});
-  }
-  if (meseVisualizzato == 'Dec' ) {
-    $('body').css({"background-image":"url('https://www.gaiaresidencehotel.com/wp-content/uploads/2017/09/SFONDI-NATALE-HD-pupazzi-di-neve-910x480.jpg')"});
-  }
-
-
 }
 
 //funzione che fa una chiamata ajax e mi va a prendere tutte le festività del 2018
