@@ -98,7 +98,7 @@ function stampaSfondo(mese) {
       $('body').css({"background-image":"url('https://images.alphacoders.com/159/thumb-1920-159471.jpg')"});
       break;
     case ('Dec') :
-      $('body').css({"background-image":"url('https://www.gaiaresidencehotel.com/wp-content/uploads/2017/09/SFONDI-NATALE-HD-pupazzi-di-neve-910x480.jpg')"});
+      $('body').css({"background-image":"url('https://redwing.org/wp-content/uploads/2018/10/Christmas-Day-SJH.jpg')"});
       break;
   }
 }
