@@ -6,7 +6,8 @@
 body {
   background-size: cover;
   background-repeat: no-repeat;
-  background-color: #000080;
+  background-image: url('https://www.settemuse.it/sfondi_ambiente/stagione_inverno/stagione_inverno_020.jpg');
+  font-family: 'Righteous', cursive;
 }
 header {
   display: flex;
@@ -24,6 +25,7 @@ button {
   padding: 0px 10px;
   border: 0;
   background-color: darkgrey;
+  font-weight: bold;
 }
 button:hover {
   cursor: pointer;
@@ -50,6 +52,6 @@ ul li {
   text-align: center;
 }
 .festa {
-  background-color: green;
+  background: radial-gradient(circle, rgba(255,252,0,1) 0%, rgba(255,16,0,1) 100%);
   color: white;
 }
