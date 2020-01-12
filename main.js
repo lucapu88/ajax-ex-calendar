@@ -84,7 +84,7 @@ var giorniSettimana = mese.isoWeekday(); //imposto il giorno ISO della settimana
 function stampaSfondo(mese) {
   var meseVisualizzato = mese.format('MMM'); //prendo l'argomento passato e lo formatto in modo che mi prenda solo il mese
   switch(meseVisualizzato) {
-    case ('Jan'):
+    case ('Jan'): //se il mese dell'argomento corrisponde a gennaio allora cambia l'immagine di sfondo del body, e così via per tutti gli altri mesi.
       $('body').css({"background-image":"url('https://www.settemuse.it/sfondi_ambiente/stagione_inverno/stagione_inverno_020.jpg')"});
       break;
     case ('Feb') :
