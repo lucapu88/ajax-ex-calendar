@@ -51,7 +51,7 @@ ul li {
   padding: 5px;
   text-align: center;
 }
-.festa {
+.festa {/* la classe festa va in aggiunta solo ai giorni festivi che vengono presi dalla chiamata ajax */
   background: radial-gradient(circle, rgba(255,252,0,1) 0%, rgba(255,16,0,1) 100%);
   color: blue;
 }
