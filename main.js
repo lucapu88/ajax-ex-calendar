@@ -39,6 +39,17 @@ $(document).ready(function() {
       }
     });
 
+    // $('button').keypress(function(event) {
+    // if (event.which == 37) {
+    //   $('.prev-left').trigger('click');
+    //   alert()
+    // }
+    // if (event.which == 39) {
+    //   $('.prev-left').trigger('click');
+    //   alert()
+    // }
+    // });
+
 //---------------------------------------------FUNZIONI-------------------------------------------------------
 //funzione che mi va ad appendere il calendario aggiornato
 function stampaMese(mese) {
@@ -47,6 +58,7 @@ function stampaMese(mese) {
   var giorniMese = mese.daysInMonth(); //recupero i giorni del mese
   var meseTesto = mese.format('MMMM'); //imposto come deve essere visualizzato il mese
   $('#meseCorrente').text(meseTesto); //imposto il mese che andrà dentro lo span
+  blocchiVuoti(mese); //prima di stampare il calendario completo, chiamo la mia funzione che mi stampa i quadrati vuoti
   for (var i = 1; i <= giorniMese; i++) { //ciclo tutti i giorni del mese
     var context = { //creo il contenuto che andrà nel mio template
       dayN : i, //inserisco nell'li il giorno numerico
@@ -58,6 +70,14 @@ function stampaMese(mese) {
     dataMeseGiorno.add(1, 'days'); //incremento di uno i giorni altrimenti mi stampa sempre 1.
   }
   $('.Sunday').css({"color":"red", "font-weight":"bold"}); //coloro tutte le domenice per capire l'inizio di settimana.
+}
+
+//funzione che mi stampa i quadrati vuoti per far si che la domenica sia sempre messa sulla colonna finale
+function blocchiVuoti(mese){
+var giorniSettimana = mese.isoWeekday(); //imposto il giorno ISO della settimana con 1 che è lunedì e 7 che è domenica.
+  for (var i = 1; i < giorniSettimana; i++) { //ciclo 1 fino alla lunghezza dei giorni della settimana
+    $('#calendario').append('<li></li>'); //finchè è minore a 7, appende un quadrato vuoto
+  }
 }
 
 //funzione che mi stampa per ogni mese un'immagine diversa
